@@ -40,5 +40,17 @@ class TreeTest {
         assertFalse(this.tree.findValue(102));
     }
 
+    @Test
+    void testIfSizeIsCorrectWhenValuesDoNotRepeat(){
+        this.tree.buildTree(new ArrayList<>(Arrays.asList(0, 1, 4, 5)));
+        assertEquals(4, this.tree.getSize());
+    }
+
+    @Test
+    void testIfSizeIsCorrectWhenValuesRepeat(){
+        this.tree.buildTree(new ArrayList<>(Arrays.asList(0, 0, 0, 0)));
+        assertEquals(1, this.tree.getSize());
+    }
+
 
 }

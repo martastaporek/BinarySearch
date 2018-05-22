@@ -3,7 +3,11 @@ import java.util.*;
 public class Tree {
 
     private Node root;
-    public static int size = 0;
+    private int size = 0;
+
+    public int getSize() {
+        return size;
+    }
 
     public void buildTree(List<Integer> numbers) {
 
@@ -15,6 +19,7 @@ public class Tree {
 
         for(Integer elem : numbersSet) {
             addLeaf(elem);
+            ++size;
         }
 
     }
@@ -31,14 +36,12 @@ public class Tree {
                 current = current.children[0];
                 if(current==null){
                     parent.children[0] = new Node(val);
-                    ++size;
                     loopContinue = false;
                 }
             }else{
                 current = current.children[1];
                 if(current==null){
                     parent.children[1] = new Node(val);
-                    ++size;
                     loopContinue = false;
                 }
             }
@@ -79,8 +82,7 @@ public class Tree {
         private Node(Integer value) {
             this.value = value;
         }
-
-        }
+    }
 
     }
 
