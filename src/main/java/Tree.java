@@ -3,13 +3,15 @@ import java.util.*;
 public class Tree {
 
     private Node root;
+    public static int size = 0;
 
-    private void buildTree(List<Integer> numbers) {
+    public void buildTree(List<Integer> numbers) {
 
         SortedSet<Integer> numbersSet = new TreeSet<>(numbers);
         Integer first = numbersSet.first();
         this.root = new Node(first);
         numbersSet.remove(first); // create first node, root
+        ++size;
 
         for(Integer elem : numbersSet) {
             addLeaf(elem);
@@ -29,16 +31,43 @@ public class Tree {
                 current = current.children[0];
                 if(current==null){
                     parent.children[0] = new Node(val);
+                    ++size;
                     loopContinue = false;
                 }
             }else{
                 current = current.children[1];
                 if(current==null){
-                    parent.children[0] = new Node(val);
+                    parent.children[1] = new Node(val);
+                    ++size;
                     loopContinue = false;
                 }
             }
         }
+    }
+
+    public boolean findValue(int val){
+
+        Node current = root;
+        boolean loopContinue = true;
+
+        while(loopContinue){
+            if(val == current.value){
+                return true;
+            }
+            if(val < current.value){
+                current = current.children[0];
+                if(current == null){
+                    return false;
+                }
+
+            }else{
+                current = current.children[1];
+                if(current == null){
+                    return false;
+                }
+            }
+        }
+        return false;
     }
 
 
